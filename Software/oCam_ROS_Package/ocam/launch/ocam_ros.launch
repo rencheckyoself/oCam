@@ -1,13 +1,18 @@
 <!-- ... -->
 <launch>
-  <node pkg="ocam" type="ocam" name="ocam" output="screen">
+
+  <arg name="show_image" default="true" doc="Displays the raw image."/>
+
+  <node pkg="ocam" type="ocam" name="ocam" output="screen" required="true">
     <param name="resolution"    value="2"/> <!-- 0: 1280x960, 1: 1280x720, 2: 640x480, 3: 640x360 -->
-    <param name="frame_rate"    value="30"/>
-    <param name="exposure"      value="100"/>
-    <param name="gain"          value="50"/>
+    <param name="frame_rate"    value="100"/>
+    <param name="exposure"      value="625"/>
+    <param name="gain"          value="100"/>
     <param name="wb_blue"       value="200"/>
     <param name="wb_red"        value="160"/>
     <param name="auto_exposure" value="true"/>
-    <param name="show_image"    value="true"/>
+    <param name="show_image"    value="$(arg show_image)"/>
+
+    <remap from="set_camera_info" to="camera/set_camera_info"/>
   </node>
 </launch>
